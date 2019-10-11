@@ -7,6 +7,7 @@ function DataGetter9000(props) {
     (acc, curr) => acc + props.selected[curr].cost,
     0
   );
+
   return (
     <div className="summary__total">
       <div className="summary__total__label">Total</div>
@@ -15,6 +16,7 @@ function DataGetter9000(props) {
       </div>
     </div>
   )
+  
 }
 
 export default DataGetter9000;

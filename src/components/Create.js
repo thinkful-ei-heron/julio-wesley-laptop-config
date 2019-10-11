@@ -1,5 +1,6 @@
 import React from 'react';
 import Features from './Features';
+import '../index.css'
 
 function Create(props) {
 

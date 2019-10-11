@@ -17,13 +17,14 @@ function Features(props) {
           {props.features[feature].map((item, id) => {
           const itemHash = slugify(JSON.stringify(item));
           return (
-          <Options 
-          selected={props.selected} 
-          updateFeature={props.updateFeature} 
-          feature={feature} 
-          item={item} 
-          itemHash={itemHash} 
-          key={id}/>
+            <Options 
+            selected={props.selected} 
+            updateFeature={props.updateFeature} 
+            feature={feature} 
+            item={item} 
+            itemHash={itemHash} 
+            key={id}
+            />
           )})}
           </fieldset>
       );

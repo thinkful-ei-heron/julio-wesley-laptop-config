@@ -3,7 +3,7 @@ import slugify from 'slugify';
 import {USCurrencyFormat} from '../App';
 
 
-function CustomizeItemResult(props) {
+function Options(props) {
   return (
     <div key={props.itemHash} className="feature__item">
       <input
@@ -20,4 +20,4 @@ function CustomizeItemResult(props) {
     </div>
   );
 };
-export default CustomizeItemResult;
+export default Options;
