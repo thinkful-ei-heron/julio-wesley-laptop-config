@@ -1,19 +1,9 @@
-import React, { Component } from 'react'
-import Header from './components/Header'
-import Features from './components/Features'
-//import Options from './components/Options'
-import Cart from './components/Cart'
-import Store from './components/Store'
+import React, { Component } from 'react';
+import Cart from './components/Cart';
+import Create from './components/Create';
 
-// Normalizes string as a slug - a string that is safe to use
-// in both URLs and html attributes
-//import slugify from 'slugify';
 
-import './App.css';
-
-// This object will allow us to
-// easily convert numbers into US dollar values
-const USCurrencyFormat = new Intl.NumberFormat('en-US', {
+export const USCurrencyFormat = new Intl.NumberFormat('en-US', {
   style: 'currency',
   currency: 'USD'
 });
@@ -26,7 +16,7 @@ class App extends Component {
         cost: 700
       },
       'Operating System': {
-        name: 'Ubuntu Linux 16.04',  //this is the state that 
+        name: 'Ubuntu Linux 16.04',
         cost: 200
       },
       'Video Card': {
@@ -42,71 +32,32 @@ class App extends Component {
 
   updateFeature = (feature, newValue) => {
     const selected = Object.assign({}, this.state.selected);
-    selected[feature] = newValue;    //this function updates the options that are selected
-    this.setState({   
+    selected[feature] = newValue;
+    this.setState({
       selected
     });
   };
 
+
   render() {
-    
-    // const features = Object.keys(this.props.features).map((feature, idx) => {
-    // const featureHash = feature + '-' + idx;
-
-    //   return (
-    //     <fieldset className="feature" key={featureHash}>
-    //       <legend className="feature__name">
-    //       <h3>{feature}</h3> 
-    //       </legend>
-    //       <Options  />
-    //       </fieldset>
-      
-    //   );
-    // });
-
-    // const summary = Object.keys(this.state.selected).map((feature, idx) => {
-    //   const featureHash = feature + '-' + idx;
-    //   const selectedOption = this.state.selected[feature]; // this block can be one component
-    //   return (
-    //     <div className="summary__option" key={featureHash}>
-    //       <div className="summary__option__label">{feature}</div> 
-    //       <div className="summary__option__value">{selectedOption.name}</div>
-    //       <div className="summary__option__cost">
-    //         {USCurrencyFormat.format(selectedOption.cost)}
-    //       </div>
-    //     </div>
-    //   );
-    // });
-
-    const total = Object.keys(this.state.selected).reduce(
-      (acc, curr) => acc + this.state.selected[curr].cost, 
-      0
-    ); // could this stay in the main App.js ?
-
     return (
       <div className="App">
-        <Header />
+        <header>
+          <h1>ELF Computing | Laptops</h1>
+        </header>
         <main>
-          <form className="main__form">   
-          <Features 
-            features={Store}
-            />
-            <h2>Customize your laptop</h2>
-          </form>
-          <section className="main__summary">
-            <h2>Your cart</h2>
-            <Cart />
-            <div className="summary__total">
-              <div className="summary__total__label">Total</div>
-              <div className="summary__total__value">
-                {USCurrencyFormat.format(total)}
-              </div>
-            </div>
-          </section>
+          <Create
+          selected={this.state.selected} 
+          updateFeature={(feature, item) => this.updateFeature(feature, item)} 
+          features={this.props.features} 
+          />
+          <Cart 
+          selected={this.state.selected} 
+          />
         </main>
       </div>
     );
   }
 }
 
-export default App;
+export default App; 

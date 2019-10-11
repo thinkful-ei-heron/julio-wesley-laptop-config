@@ -1,13 +1,34 @@
-import React, { Component } from 'react'
+import React from 'react'
+import CartItem from './CartItem'
+import Datagetter9000 from './Datagetter9000'
+import '../App.css'
 
-export default class Cart extends Component {
-  render() {
+
+function Cart(props) {
+
     return (
-      <div>
-        <p>Cart Component</p>
-      </div>
+      <section className="main__summary">
+        <h2>Your cart</h2>
+
+         { Object.keys(props.selected).map((feature, idx) => {
+        
+          const featureHash = feature + '-' + idx;
+          const selectedOption = props.selected[feature];
+
+          return ( 
+          <CartItem 
+          featureHash={featureHash} 
+          selectedOption={selectedOption} 
+          feature={feature} key={idx}/>
+          )
+        })
+        }
+    
+        <Datagetter9000 selected={props.selected} />
+      </section>
     )
-  }
 }
 
+
+export default Cart;
 

@@ -1,46 +1,36 @@
-import React, { Component } from 'react'
-import Options from './Options'
+import React from 'react';
+import Options from './Options';
+import slugify from 'slugify';
 
 
-export default class Features extends Component {
-features = Object.keys(this.props.features).map((feature, idx) => {
+function Features(props) {
+  return (
+  Object.keys(props.features).map((feature, idx) => {
     const featureHash = feature + '-' + idx;
-            return(
-                    <fieldset className="feature" key={featureHash}>
-                        <legend className="feature__name">
-                        <h3>{feature}</h3> 
-                        </legend>
-                        <Options Store={this.props.features[feature]}  />
-                    </fieldset>
-            );
-            
-});
-    render() {
-        return(
-            this.features
-        );
-    }
-}
+    return (
+   
+        <fieldset className="feature" key={featureHash}>
+          <legend className="feature__name">
+            <h3>{feature}</h3>
+          </legend>
+
+          {props.features[feature].map((item, id) => {
+          const itemHash = slugify(JSON.stringify(item));
+          return (
+          <Options 
+          selected={props.selected} 
+          updateFeature={props.updateFeature} 
+          feature={feature} 
+          item={item} 
+          itemHash={itemHash} 
+          key={id}/>
+          )})}
+          </fieldset>
+      );
+    })
+  )}
 
 
+  
 
-    // const features = Object.keys(this.props.features).map((feature, idx) => {
-    // const featureHash = feature + '-' + idx;
-
-    //   return (
-    //     <fieldset className="feature" key={featureHash}>
-    //       <legend className="feature__name">
-    //       <h3>{feature}</h3> 
-    //       </legend>
-    //       <Options  />
-    //       </fieldset>
-      
-    //   );
-    // });
-
-//ES7 React/Redux/GraphQL/React-Native snippets
-
-
-//           App
-// Features  -- Cart
-// Options
+export default Features;
